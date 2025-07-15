@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Interview Preparation Bot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Job Interview Preparation Bot</h1>
+        
+        <form action="/ask_question" method="POST">
+            <label for="tech_stack">Select Tech Stack:</label>
+            <select name="tech_stack" id="tech_stack">
+                <option value="Python">Python</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="Java">Java</option>
+                <option value="C++">C++</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Data Science">Data Science</option>
+            
+            </select> 
+
+            <label for="difficulty">Select Difficulty Level:</label>
+            <select name="difficulty" id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+
+            <button type="submit">Start Interview</button>
+        </form>
+
+        {% if question %}
+            <h3>Interview Question:</h3>
+            <p>{{ question }}</p>
+            <form action="/give_feedback" method="POST">
+                <label for="answer">Your Answer:</label>
+                <textarea name="answer" id="answer" rows="4"></textarea>
+                <input type="hidden" name="tech_stack" value="{{ tech_stack }}">
+                <input type="hidden" name="difficulty" value="{{ difficulty }}">
+                <input type="hidden" name="question" value="{{ question }}">
+                <button type="submit">Get Feedback</button>
+            </form>
+        {% endif %}
+    </div>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
