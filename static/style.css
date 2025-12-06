@@ -1,51 +1,421 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     margin: 0;
-    padding: 0;
+    padding: 20px;
+    min-height: 100vh;
 }
 
 .container {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
     background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
     text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+h3 {
+    color: #444;
+    margin-top: 20px;
 }
 
 form {
     margin: 20px 0;
 }
 
-select, textarea, button {
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #555;
+}
+
+select, textarea, button, input[type="text"] {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+select:focus, textarea:focus, input[type="text"]:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 button {
     background-color: #007bff;
     color: white;
     cursor: pointer;
+    border: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 button:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+button:active {
+    transform: translateY(0);
 }
 
 textarea {
-    height: 150px;
+    height: 180px;
+    resize: vertical;
+    font-family: inherit;
 }
 
 .question {
-    background-color: #e9ecef;
+    background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+    position: relative;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.question-section {
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Progress and Stats Section */
+.progress-section {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    animation: fadeIn 0.5s ease;
+}
+
+.progress-section h3 {
+    color: white;
+    margin-top: 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.stat-item {
+    text-align: center;
     padding: 10px;
-    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+}
+
+.stat-label {
+    display: block;
+    font-size: 12px;
+    opacity: 0.9;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.stats-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease;
+}
+
+.stat-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.stat-card .stat-label {
+    font-size: 13px;
+    opacity: 0.9;
+    margin: 5px 0;
+}
+
+.stat-card .stat-value {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #28a745, #20c997);
+    transition: width 0.6s ease;
+    border-radius: 10px;
+}
+
+/* Suggestion Box */
+.suggestion-box {
+    background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border-left: 4px solid #f39c12;
+    animation: slideIn 0.5s ease;
+}
+
+.suggestion-box h4 {
+    margin-top: 0;
+    color: #d63031;
+}
+
+.suggestion-box p {
+    margin-bottom: 0;
+    color: #2d3436;
+}
+
+/* Hint Section */
+.hint-section {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border-left: 4px solid #00b894;
+    animation: slideIn 0.5s ease;
+}
+
+.hint-section h4 {
+    margin-top: 0;
+    color: #00b894;
+}
+
+.hint-section p {
+    color: #2d3436;
+    line-height: 1.6;
+}
+.timer {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+}
+
+.char-counter {
+    text-align: right;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.copy-btn, .speech-btn {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    margin: 5px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.copy-btn:hover, .speech-btn:hover {
+    background: linear-gradient(135deg, #218838, #1a9e7a);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.difficulty-tips {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.tip {
+    color: #6c757d;
+    font-style: italic;
+    display: block;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.feedback-section {
+    background-color: #f8f9fa;
+    border-left: 4px solid #667eea;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.feedback-content {
+    line-height: 1.8;
+    color: #333;
+    white-space: pre-wrap;
+}
+
+.feedback-score {
+    font-size: 32px;
+    font-weight: bold;
+    color: #667eea;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.button-group button,
+.button-group a {
+    flex: 1;
+    min-width: 140px;
+}
+
+.secondary-btn {
+    background: linear-gradient(135deg, #6c757d, #5a6268);
+    color: white;
+}
+
+.secondary-btn:hover {
+    background: linear-gradient(135deg, #545b62, #4e555b);
+}
+
+.success-btn {
+    background: linear-gradient(135deg, #28a745, #20c997);
+}
+
+.success-btn:hover {
+    background: linear-gradient(135deg, #218838, #1a9e7a);
+}
+
+.danger-btn {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: white;
+}
+
+.danger-btn:hover {
+    background: linear-gradient(135deg, #c82333, #bd2130);
+}
+
+/* Responsive design improvements */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.stat-card:hover {
+    animation: pulse 0.5s ease;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 1.5em;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .button-group button,
+    .button-group a {
+        min-width: 100%;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .timer {
+        font-size: 16px;
+    }
+    
+    textarea {
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-summary {
+        grid-template-columns: 1fr;
+    }
 }

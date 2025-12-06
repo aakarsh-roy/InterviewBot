@@ -3,16 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback</title>
+    <title>Interview Feedback</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Interview Feedback</h1>
+        <h1>📝 Interview Feedback</h1>
         
-        <p>{{ feedback }}</p>
+        <div class="stats-summary">
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-label">Your Score</div>
+                <div class="stat-value">{{ score }}/10</div>
+            </div>
+            
+            {% if time_taken %}
+            <div class="stat-card">
+                <div class="stat-icon">⏱️</div>
+                <div class="stat-label">Time Taken</div>
+                <div class="stat-value">{{ "%.1f"|format(time_taken) }}s</div>
+            </div>
+            {% endif %}
+            
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-label">Avg Score</div>
+                <div class="stat-value">{{ "%.1f"|format(avg_score) }}/10</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-label">Questions</div>
+                <div class="stat-value">{{ session_progress }}</div>
+            </div>
+        </div>
         
-        <a href="/">Back to Interview</a>
+        {% if suggested_difficulty %}
+        <div class="suggestion-box">
+            <h4>💡 Suggestion</h4>
+            <p>Based on your performance, you might want to try <strong>{{ suggested_difficulty }}</strong> difficulty questions next!</p>
+        </div>
+        {% endif %}
+        
+        <div class="feedback-section">
+            <h3>🎯 Detailed Feedback</h3>
+            <div class="feedback-content">
+                {{ feedback|replace('\n', '<br>')|safe }}
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button onclick="continueInterview()" class="success-btn">➡️ Next Question</button>
+            <a href="/" class="secondary-btn" style="text-decoration: none; text-align: center; display: inline-block;">🏠 New Interview</a>
+            <button onclick="shareResults()" class="secondary-btn">📤 Share</button>
+        </div>
     </div>
+
+    <script>
+        async function continueInterview() {
+            try {
+                const response = await fetch('/next_question', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.question) {
+                    // Redirect to home with the new question
+                    window.location.href = '/';
+                } else {
+                    alert('Error loading next question. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error getting next question:', error);
+                alert('Error loading next question. Please try again.');
+            }
+        }
+    
+        function shareResults() {
+            const score = {{ score }};
+            const avgScore = {{ "%.1f"|format(avg_score) }};
+            const questions = {{ session_progress }};
+            
+            const shareData = {
+                title: 'Interview Bot Results',
+                text: `Just scored ${score}/10 on my latest interview question! Average: ${avgScore}/10 across ${questions} questions. Practice with Interview Bot!`,
+                url: window.location.origin
+            };
+
+            if (navigator.share) {
+                navigator.share(shareData);
+            } else {
+                const text = `I scored ${score}/10! Average: ${avgScore}/10 across ${questions} questions.`;
+                navigator.clipboard.writeText(text + ' ' + window.location.origin).then(() => {
+                    alert('Results copied to clipboard!');
+                });
+            }
+        }
+    </script>
 </body>
 </html>
